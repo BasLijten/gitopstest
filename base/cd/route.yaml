@@ -1,0 +1,17 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: achmea-openshift-demo-sitecore-cd-r
+spec:
+  host: achmea-openshift-demo-sitecore-cd-insurco-sitecore.app.d01.az.services.corp
+  path: /weatherforecast
+  to:
+    kind: Service
+    name: achmea-openshift-demo-sitecore-cd-s
+    weight: 100
+  port:
+    targetPort: 8080
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None

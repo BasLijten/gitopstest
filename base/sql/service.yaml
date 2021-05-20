@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: achmea-openshift-demo-sitecore-sql-s
+spec:
+  ports:
+  - port: 443
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: achmea-openshift-demo-sitecore-sql
+    deployment: achmea-openshift-demo-sitecore-sql-d
+  sessionAffinity: None
+  type: ClusterIP

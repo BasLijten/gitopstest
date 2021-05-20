@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:  
+  labels:
+    app: achmea-openshift-demo-sitecore-cm
+    deployment: achmea-openshift-demo-sitecore-cm
+  name: achmea-openshift-demo-sitecore-cm-d
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: achmea-openshift-demo-sitecore-cm
+      deployment: achmea-openshift-demo-sitecore-cm-d
+  template:
+    metadata:
+      labels:
+          app: achmea-openshift-demo-sitecore-cm
+          deployment: achmea-openshift-demo-sitecore-cm-d
+    spec:
+      containers:
+      - env:
+        - name: ENV-VAR-EXAMPLE
+          value: ExampleValue
+        image: bintray.az.unix.corp:5000/insurco-sitecore-docker-d01/achmea-openshift-demo-sitecore-cm:rev01
+        imagePullPolicy: Always
+        name: achmea-openshift-demo-sitecore-cm
+        resources:
+          limits:
+            cpu: 200m
+            memory: 500Mi
+          requests:
+            cpu: 200m
+            memory: 500Mi      
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccountName: achmea-openshift-demo-sitecore-cm-sa
+      terminationGracePeriodSeconds: 30
